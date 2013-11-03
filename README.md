@@ -42,6 +42,7 @@ The following options can be set either through data attributes on the time inpu
   incIconClass: 'icon-chevron-up',
   decIconClass: 'icon-chevron-down'
 }
+```
 
 ## Demo
 
