@@ -4,7 +4,9 @@ angular.module('easyTimepicker', [])
   minuteStep: 15,
   showMeridian: true,
   meridians: ['AM', 'PM'],
-  widgetColClass: 'col-xs-4'
+  widgetColClass: 'col-xs-4',
+  incIconClass: 'icon-chevron-up',
+  decIconClass: 'icon-chevron-down'
 })
 
 .directive('ezTimepicker', ['$compile', '$document', 'EasyTimepickerConfig', function($compile, $document, EasyTimepickerConfig) {
@@ -20,6 +22,8 @@ angular.module('easyTimepicker', [])
       scope.showMeridian = scope.$eval(attrs.showMeridian) || EasyTimepickerConfig.showMeridian;
       scope.meridians = attrs.meridians || EasyTimepickerConfig.meridians;
       scope.widgetColClass = attrs.widgetColClass || EasyTimepickerConfig.widgetColClass;
+      scope.incIconClass = attrs.incIconClass || EasyTimepickerConfig.incIconClass;
+      scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
       scope.widget = {};
 
       // format time if element input is changed
