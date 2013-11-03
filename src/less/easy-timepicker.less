@@ -1,0 +1,49 @@
+.easy-timepicker-container {
+
+  width: 300px;
+
+  .hours-col, .minutes-col, .meridian-col {
+    text-align: center;
+    padding: 0 !important;
+
+    a {
+      color: #000;
+      font-size: 18px;
+      width: 100%;
+      display: block;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+
+      &:hover {
+        border: solid 1px #ccc;
+        background-color: #eee;
+      }
+
+      i {
+        padding: 0;
+      }
+
+    }
+
+    div:nth-child(2) {
+      margin: 2px 0;
+      font-size: 16px;
+    }
+  } 
+
+  .dropdown-menu {
+    padding: 5px;
+
+    &::after {
+      position: absolute;
+      top: -6px;
+      left: 10px;
+      display: inline-block;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid white;
+      border-left: 6px solid transparent;
+      content: '';
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="dropdown easy-timepicker-container" ng-class="{open: toggler}">
+  <div class="dropdown-menu">
+    <div class="hours-col" ng-class="widgetColClass">
+      <div><a class="btn" ng-click="incrementHours()"><i class="icon-chevron-up"></i></a></div>
+      <div class="hours-val">{{ widget.hours }}</div>
+      <div><a class="btn" ng-click="decrementHours()"><i class="icon-chevron-down"></i></a></div>
+    </div>
+    <div class="minutes-col" ng-class="widgetColClass">
+      <div><a class="btn" ng-click="incrementMinutes()"><i class="icon-chevron-up"></i></a></div>
+      <div class="minutes-val">{{ widget.minutes }}</div>
+      <div><a class="btn" ng-click="decrementMinutes()"><i class="icon-chevron-down"></i></a></div>
+    </div>
+    <div class="meridian-col" ng-class="widgetColClass" ng-show="showMeridian">
+      <div><a class="btn" ng-click="toggleMeridian()"><i class="icon-chevron-up"></i></a></div>
+      <div class="meridian-val" ng-click="toggleMeridian()">{{ widget.meridian }}</div>
+      <div><a class="btn" ng-click="toggleMeridian()"><i class="icon-chevron-down"></i></a></div>
+    </div>
+  </div>
+</div>

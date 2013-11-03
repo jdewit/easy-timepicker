@@ -1,0 +1,18 @@
+{
+  "name": "easy-timepicker",
+  "version": "0.0.0",
+  "main": ["dist/easy-timepicker.min.js", "dist/easy-timepicker.min.css"],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.0.3",
+    "angular": "~1.2.0-rc.2",
+    "autotype": "https://raw.github.com/mmonteleone/jquery.autotype/master/jquery.autotype.js",
+    "angular-mocks": "~1.2.0-rc.2"
+  }
+}
