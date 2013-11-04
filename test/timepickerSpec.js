@@ -1,19 +1,19 @@
 describe('timepicker directive', function () {
   var scope, el, ezScope, input;
 
+    var minuteStep = 15;
   beforeEach(module('easyTimepicker'));
+  beforeEach(module('ui.bootstrap'));
   beforeEach(inject(function(_$compile_, _$rootScope_) {
     $compile = _$compile_;
     scope = _$rootScope_;
 
-    el = angular.element('<div class="input-group"><input id="ezTime" type="text" ng-model="time" ez-timepicker="showTp1" class="form-control ng-isolate-scope ng-scope ng-pristine ng-valid"><span class="input-group-btn"><button ng-click="showTp1 = !showTp1" class="btn btn-default"><i class="icon-clock"></i></button></span></div>');
+    el = angular.element('<input ez-timepicker="time"/>');
 
     $compile(el)(scope);
 
     scope.$digest();
-
-    input = el.find('#ezTime');
-    ezScope = input.scope();
+    input = el.find('input');
   }));
 
   var timeToString = function(hours, minutes, meridian) {
@@ -25,46 +25,46 @@ describe('timepicker directive', function () {
   };
 
   var setInput = function(val) {
-    input.val(val).trigger('blur').trigger('input');
+    input.val(val).trigger('input').trigger('blur');
   }
 
   function mouseWheel(element, delta) {
     var e = $.Event('mousewheel');
-    e.wheelDelta = -delta;
+    e.wheelDelta = delta;
     element.trigger(e);
   }
 
   function wheel(element, delta) {
     var e = $.Event('wheel');
-    e.deltaY = delta;
+    e.deltaY = -delta;
     element.trigger(e);
   }
 
   it('should add the widget template', function() {
-    expect(el.find('.easy-timepicker-container').length).toBe(1);
+    expect(el.find('.dropdown-menu').length).toBe(1);
   });
 
   it('should open & close widget on button toggle', function() {
-    el.find('.input-group-btn button').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(true);
+    el.find('.input-group-btn a').click();
+    expect(el.hasClass('open')).toBe(true);
 
-    el.find('.input-group-btn button').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(false);
+    el.find('.input-group-btn a').click();
+    expect(el.hasClass('open')).toBe(false);
   });
 
   it('should close widget on click outside', function() {
-    el.find('.input-group-btn button').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(true);
+    el.find('.input-group-btn a').click();
+    expect(el.hasClass('open')).toBe(true);
 
     angular.element('body').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(false);
+    expect(el.hasClass('open')).toBe(false);
 
     // repeat to make sure events get rebound
-    el.find('.input-group-btn button').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(true);
+    el.find('.input-group-btn a').click();
+    expect(el.hasClass('open')).toBe(true);
 
     angular.element('body').click();
-    expect(el.find('.dropdown').hasClass('open')).toBe(false);
+    expect(el.hasClass('open')).toBe(false);
   });
 
   it('should have current time by default', function() {
@@ -74,7 +74,7 @@ describe('timepicker directive', function () {
         meridian;
 
     if (minutes !== 0) {
-      minutes = Math.ceil(minutes / ezScope.minuteStep) * ezScope.minuteStep;
+      minutes = Math.ceil(minutes / minuteStep) * minuteStep;
     }
 
     if (minutes === 60) {
@@ -139,23 +139,24 @@ describe('timepicker directive', function () {
 
   it('should increment/decrement hours on scroll', function() {
     setInput('11:00 AM');
-    el.find('.input-group-btn button').click();
+    el.find('.input-group-btn a').click();
+    expect(el.hasClass('open')).toBe(true);
 
-    wheel(el.find('.hours-col'), -1);
-    expect(scope.time).toEqual('12:00 PM');
+    wheel(el.find('.hours-col'), 1);
+    expect(input.val()).toEqual('12:00 PM');
 
-    mouseWheel(el.find('.hours-col'), 1);
+    mouseWheel(el.find('.hours-col'), -1);
     expect(scope.time).toEqual('11:00 AM');
   });
 
   it('should increment/decrement minutes on scroll', function() {
     setInput('11:45 AM');
-    el.find('.input-group-btn button').click();
+    el.find('.input-group-btn a').click();
 
-    wheel(el.find('.minutes-col'), -1);
+    wheel(el.find('.minutes-col'), 1);
     expect(scope.time).toEqual('12:00 PM');
 
-    mouseWheel(el.find('.minutes-col'), 1);
+    mouseWheel(el.find('.minutes-col'), -1);
     expect(scope.time).toEqual('11:45 AM');
   });
 

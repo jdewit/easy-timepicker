@@ -7,8 +7,9 @@ Click the buttons to increment/decrement hours & minutes or scroll with your mou
 
 It's also smart enough to convert invalid input such as '1a' into '1:00 AM'
 
-Built with the awesome [AngularJS](http://angularjs.org/).
-Utilizes [Bootstrap 3](http://http://getbootstrap.com') styling.
+- Built with the awesome [AngularJS](http://angularjs.org/).
+- Utilizes [Bootstrap 3](http://http://getbootstrap.com') styling.
+- Requires [angular-ui dropdown menu](http://angular-ui.github.io/bootstrap/#/dropdownToggle')
 
 ## Install
 
@@ -19,14 +20,7 @@ $ bower install easy-timepicker
 ## Usage 
 
 ```html
-<div class="input-group">
-  <input type="text" ng-model="time" ez-timepicker="showTp1" class="form-control">
-  <span class="input-group-btn">
-    <button ng-click="showTp1 = !showTp1" class="btn btn-default">
-      <i class="icon-clock"></i>
-    </button>
-  </span>
-</div>
+  <div ez-timepicker="time"></div>
 ```
 
 ## Configuration
@@ -38,6 +32,9 @@ The following options can be set either through data attributes on the time inpu
   minuteStep: 15,
   showMeridian: true,
   meridians: ['AM', 'PM'],
+  inputClass: 'form-control',
+  inputContainerClass: 'input-group',
+  clockIconClass: 'icon-clock',
   widgetColClass: 'col-xs-4',
   incIconClass: 'icon-chevron-up',
   decIconClass: 'icon-chevron-down'

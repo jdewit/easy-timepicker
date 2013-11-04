@@ -8,7 +8,7 @@ module.exports = function(config) {
       // libraries
       'bower_components/jquery/jquery.js',
       'bower_components/angular/angular.js',
-      'bower_components/autotype/index.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
 
       // our app

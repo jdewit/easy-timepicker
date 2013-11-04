@@ -4,6 +4,9 @@ angular.module('easyTimepicker', [])
   minuteStep: 15,
   showMeridian: true,
   meridians: ['AM', 'PM'],
+  inputClass: 'form-control',
+  inputContainerClass: 'input-group',
+  clockIconClass: 'icon-clock',
   widgetColClass: 'col-xs-4',
   incIconClass: 'icon-chevron-up',
   decIconClass: 'icon-chevron-down'
@@ -12,25 +15,31 @@ angular.module('easyTimepicker', [])
 .directive('ezTimepicker', ['$compile', '$document', 'EasyTimepickerConfig', function($compile, $document, EasyTimepickerConfig) {
   return {
 		restrict: 'EA',
-    required: '?^ngModel',
+    replace: true,
+    templateUrl: 'easy-timepicker.html',
     scope: {
-      toggler: '=ezTimepicker',
-      time: '=ngModel'
+      time: '=ezTimepicker'
     },
     link: function(scope, element, attrs) {
       scope.minuteStep = parseInt(attrs.minuteStep, 10) || EasyTimepickerConfig.minuteStep;
       scope.showMeridian = scope.$eval(attrs.showMeridian) || EasyTimepickerConfig.showMeridian;
       scope.meridians = attrs.meridians || EasyTimepickerConfig.meridians;
+      scope.inputClass = attrs.inputClass || EasyTimepickerConfig.inputClass;
+      scope.inputContainerClass = attrs.inputContainerClass || EasyTimepickerConfig.inputContainerClass;
+      scope.clockIconClass = attrs.inputContainerClass || EasyTimepickerConfig.clockIconClass;
       scope.widgetColClass = attrs.widgetColClass || EasyTimepickerConfig.widgetColClass;
       scope.incIconClass = attrs.incIconClass || EasyTimepickerConfig.incIconClass;
       scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
       scope.widget = {};
 
-      // format time if element input is changed
-      element.on('blur', function(e) {
-        setTime(element.val());
-        element.val(getTimeString);
-      });
+      scope.updateFromInput = function() {
+        setTime(scope.time);
+      };
+
+      scope.preventDefault = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      };
 
       scope.incrementHours = function() {
         if (scope.showMeridian) {
@@ -98,12 +107,11 @@ angular.module('easyTimepicker', [])
       };
 
       var updateModel = function() {
-        if (!angular.isDefined(scope.widget.hours) && !angular.isDefined(scope.widget.minutes)) {
-          setTime(scope.time);
+        if (angular.isDefined(scope.widget.hours) && angular.isDefined(scope.widget.minutes)) {
+          scope.time = scope.widget.hours + ':' + scope.widget.minutes + ' ' + scope.widget.meridian;
         } else {
-          setTime(scope.widget.hours + ':' + scope.widget.minutes + ' ' + scope.widget.meridian);
+          setTime(scope.time);
         }
-        scope.time = getTimeString();
       };
 
       var isScrollingUp = function(e) {
@@ -115,22 +123,18 @@ angular.module('easyTimepicker', [])
       };
 
       var scrollHours = function(e) {
-        scope.$apply( (isScrollingUp(e)) ? scope.incrementHours() : scope.decrementHours() );
+        scope.$apply(isScrollingUp(e) ? scope.incrementHours() : scope.decrementHours());
         e.preventDefault();
       };
 
       var scrollMinutes = function(e) {
-        scope.$apply( (isScrollingUp(e)) ? scope.incrementMinutes() : scope.decrementMinutes() );
+        scope.$apply(isScrollingUp(e) ? scope.incrementMinutes() : scope.decrementMinutes());
         e.preventDefault();
       };
 
       var scrollMeridian = function(e) {
         scope.$apply(scope.toggleMeridian());
         e.preventDefault();
-      };
-
-      var getTimeString = function() {
-        return scope.widget.hours + ':' + scope.widget.minutes + ' ' + scope.widget.meridian;
       };
 
       var setTime = function(time) {
@@ -194,61 +198,17 @@ angular.module('easyTimepicker', [])
         scope.widget.minutes = Math.ceil(minutes / scope.minuteStep) * scope.minuteStep;
 
         formatMinutes();
+
+        scope.time = scope.widget.hours + ':' + scope.widget.minutes + ' ' + scope.widget.meridian;
       };
 
-      var stopEvents = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-      };
-
-      var closePicker = function(e) {
-        stopEvents(e);
-
-        if (scope.toggler)  {
-          scope.$apply(function() {
-            scope.toggler = false;
-            $document.off('click', closePicker);
-          });
-        }
-      };
-
-      scope.$watch('toggler', function(val) {
-        if (val === true) {
-          setTime(scope.time);
-
-          // close if time input is clicked
-          element.on('click', closePicker);
-
-          // keep open on widget click
-          element.parent().on('click', stopEvents);
-
-          // close on click outside
-          $document.on('click', closePicker);
-
-          element.parent().find('.hours-col').on('mousewheel wheel', scrollHours);
-          element.parent().find('.minutes-col').on('mousewheel wheel', scrollMinutes);
-          element.parent().find('.meridian-col').on('mousewheel wheel', scrollMeridian);
-
-        } else {
-          element.off('click', closePicker);
-          element.parent().off('click', stopEvents);
-          $document.off('click', closePicker);
-
-          element.parent().find('.hours-col').off('mousewheel wheel', scrollHours);
-          element.parent().find('.minutes-col').off('mousewheel wheel', scrollMinutes);
-          element.parent().find('.meridian-col').off('mousewheel wheel', scrollMeridian);
-        }
-      });
+      element.find('.hours-col').on('mousewheel wheel', scrollHours);
+      element.find('.minutes-col').on('mousewheel wheel', scrollMinutes);
+      element.find('.meridian-col').on('mousewheel wheel', scrollMeridian);
 
       scope.$watch('widget', function(val) {
         updateModel();
       }, true);
-
-      var template = angular.element(document.createElement('div')).attr('ng-include', "'easy-timepicker.html'");
-
-      $compile(template)(scope);
-
-      element.after(template);
     }
   };
 }]);

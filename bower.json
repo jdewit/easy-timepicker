@@ -12,7 +12,7 @@
   "devDependencies": {
     "jquery": "~2.0.3",
     "angular": "~1.2.0-rc.2",
-    "autotype": "https://raw.github.com/mmonteleone/jquery.autotype/master/jquery.autotype.js",
+    "angular-bootstrap": "latest",
     "angular-mocks": "~1.2.0-rc.2"
   }
 }
