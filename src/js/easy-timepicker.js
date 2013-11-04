@@ -1,4 +1,4 @@
-angular.module('easyTimepicker', [])
+angular.module('easyTimepicker', ['ui.bootstrap'])
 
 .constant('EasyTimepickerConfig', {
   minuteStep: 15,
@@ -6,7 +6,7 @@ angular.module('easyTimepicker', [])
   meridians: ['AM', 'PM'],
   inputClass: 'form-control',
   inputContainerClass: 'input-group',
-  clockIconClass: 'icon-clock',
+  clockIconClass: 'icon-time',
   widgetColClass: 'col-xs-4',
   incIconClass: 'icon-chevron-up',
   decIconClass: 'icon-chevron-down'
