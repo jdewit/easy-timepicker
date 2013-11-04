@@ -26,7 +26,7 @@ angular.module('easyTimepicker', [])
       scope.meridians = attrs.meridians || EasyTimepickerConfig.meridians;
       scope.inputClass = attrs.inputClass || EasyTimepickerConfig.inputClass;
       scope.inputContainerClass = attrs.inputContainerClass || EasyTimepickerConfig.inputContainerClass;
-      scope.clockIconClass = attrs.inputContainerClass || EasyTimepickerConfig.clockIconClass;
+      scope.clockIconClass = attrs.clockIconClass || EasyTimepickerConfig.clockIconClass;
       scope.widgetColClass = attrs.widgetColClass || EasyTimepickerConfig.widgetColClass;
       scope.incIconClass = attrs.incIconClass || EasyTimepickerConfig.incIconClass;
       scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
