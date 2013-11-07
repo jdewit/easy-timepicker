@@ -12,7 +12,7 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
   decIconClass: 'icon-chevron-down'
 })
 
-.directive('ezTimepicker', ['$compile', '$document', 'EasyTimepickerConfig', function($compile, $document, EasyTimepickerConfig) {
+.directive('ezTimepicker', ['EasyTimepickerConfig', function(EasyTimepickerConfig) {
   return {
 		restrict: 'EA',
     replace: true,
