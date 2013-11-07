@@ -32,6 +32,9 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
       scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
       scope.widget = {};
 
+      element.find('input.time-input').attr('id', element.attr('id'));
+      element.removeAttr('id');
+
       scope.updateFromInput = function() {
         setTime(scope.time);
       };
