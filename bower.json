@@ -1,6 +1,6 @@
 {
   "name": "ez-timepicker",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": ["dist/ez-timepicker.min.js", "dist/ez-timepicker.min.css"],
   "ignore": [
     "**/.*",

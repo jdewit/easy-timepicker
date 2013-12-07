@@ -2,7 +2,7 @@
   "name": "ez-timepicker",
   "description": "Angular timepicker directive",
   "keywords": [],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "author": "Joris de Wit",
   "repository": {
@@ -16,7 +16,7 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~0.4.2",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-jshint": "~0.6.4",
@@ -30,6 +30,8 @@
     "karma-requirejs": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma": "~0.10.4",
-    "grunt-angular-templates": "~0.5.0"
+    "grunt-angular-templates": "~0.5.0",
+    "bump": "~0.2.3",
+    "grunt-bump": "0.0.11"
   }
 }
