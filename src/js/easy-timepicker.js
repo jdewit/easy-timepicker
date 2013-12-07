@@ -16,6 +16,7 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
   return {
 		restrict: 'EA',
     replace: true,
+    transclude: 'element',
     templateUrl: 'easy-timepicker.html',
     scope: {
       time: '=ezTimepicker'
@@ -32,8 +33,9 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
       scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
       scope.widget = {};
 
-      element.find('input.time-input').attr('id', element.attr('id'));
-      element.removeAttr('id');
+      // fix automatic attribute mapping to root element
+      //element.find('input.time-input').attr('id', attrs.id).attr('class', attrs.class);
+      //element.removeAttr('id').attr('class', 'dropdown easy-timepicker-container');
 
       scope.updateFromInput = function() {
         setTime(scope.time);

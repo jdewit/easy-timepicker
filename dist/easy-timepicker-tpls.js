@@ -3,9 +3,9 @@ angular.module('easyTimepicker').run(['$templateCache', function($templateCache)
   $templateCache.put('easy-timepicker.html',
     "<div class=\"dropdown easy-timepicker-container\">\n" +
     "  <div class=\"dropdown-toggle\" ng-class=\"inputContainerClass\">\n" +
-    "    <input class=\"time-input\" type=\"text\" ng-model=\"time\" ng-blur=\"updateFromInput()\" ng-class=\"inputClass\"/>\n" +
+    "    <div class=\"time-input\" ng-transclude></div>\n" +
     "    <span class=\"input-group-btn\">\n" +
-    "      <a class=\"btn btn-default\">\n" +
+    "      <a class=\"btn btn-default btn-sm\">\n" +
     "        <i ng-class=\"clockIconClass\"></i>\n" +
     "      </a>\n" +
     "    </span>\n" +

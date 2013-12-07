@@ -1,8 +1,8 @@
 <div class="dropdown easy-timepicker-container">
   <div class="dropdown-toggle" ng-class="inputContainerClass">
-    <input class="time-input" type="text" ng-model="time" ng-blur="updateFromInput()" ng-class="inputClass"/>
+    <div class="time-input" ng-transclude></div>
     <span class="input-group-btn">
-      <a class="btn btn-default">
+      <a class="btn btn-default btn-sm">
         <i ng-class="clockIconClass"></i>
       </a>
     </span>
