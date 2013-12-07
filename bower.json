@@ -1,7 +1,7 @@
 {
-  "name": "easy-timepicker",
+  "name": "ez-timepicker",
   "version": "0.0.0",
-  "main": ["dist/easy-timepicker.min.js", "dist/easy-timepicker.min.css"],
+  "main": ["dist/ez-timepicker.min.js", "dist/ez-timepicker.min.css"],
   "ignore": [
     "**/.*",
     "node_modules",

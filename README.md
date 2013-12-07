@@ -1,4 +1,4 @@
-EasyTimepicker Directive
+EzTimepicker Directive
 ========================
 
 A timepicker directive that allows a user to select a time via a dropdown widget.
@@ -14,7 +14,7 @@ It's also smart enough to convert invalid input such as '1a' into '1:00 AM'
 ## Install
 
 ```bash
-$ bower install easy-timepicker
+$ bower install ez-timepicker
 ```
 
 ## Usage 
@@ -25,7 +25,7 @@ $ bower install easy-timepicker
 
 ## Configuration
 
-The following options can be set either through data attributes on the time input or by overriding the EasyTimepickerConfig constant.
+The following options can be set either through data attributes on the time input or by overriding the EzTimepickerConfig constant.
 
 ```js
 {  

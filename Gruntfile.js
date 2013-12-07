@@ -42,14 +42,14 @@ module.exports = function(grunt) {
               yuicompress: true
             },
             files: {
-              "dist/easy-timepicker.min.css": "src/less/easy-timepicker.less"
+              "dist/ez-timepicker.min.css": "src/less/ez-timepicker.less"
             }
           }
         },
         ngtemplates:  {
-            easyTimepicker:      {
-                src:      'src/template/easy-timepicker.html',
-                dest:     'dist/easy-timepicker-tpls.js',
+            'ez.timepicker':      {
+                src:      'src/template/ez-timepicker.html',
+                dest:     'dist/ez-timepicker-tpls.js',
                 options:  {
                   url:    function(url) { return url.replace('src/template/', ''); }
                 }
@@ -62,8 +62,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/easy-timepicker.min.js': [
-                      'src/js/easy-timepicker.js'
+                    'dist/ez-timepicker.min.js': [
+                      'src/js/ez-timepicker.js'
                     ]
                 }
             }

@@ -1,6 +1,6 @@
-angular.module('easyTimepicker', ['ui.bootstrap'])
+angular.module('ez.timepicker', ['ui.bootstrap'])
 
-.constant('EasyTimepickerConfig', {
+.constant('EzTimepickerConfig', {
   minuteStep: 15,
   showMeridian: true,
   meridians: ['AM', 'PM'],
@@ -12,39 +12,30 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
   decIconClass: 'icon-chevron-down'
 })
 
-.directive('ezTimepicker', ['EasyTimepickerConfig', function(EasyTimepickerConfig) {
+.directive('ezTimepicker', ['EzTimepickerConfig', function(EzTimepickerConfig) {
   return {
 		restrict: 'EA',
     replace: true,
     transclude: 'element',
-    templateUrl: 'easy-timepicker.html',
+    templateUrl: 'ez-timepicker.html',
     scope: {
       time: '=ezTimepicker'
     },
     link: function(scope, element, attrs) {
-      scope.minuteStep = parseInt(attrs.minuteStep, 10) || EasyTimepickerConfig.minuteStep;
-      scope.showMeridian = scope.$eval(attrs.showMeridian) || EasyTimepickerConfig.showMeridian;
-      scope.meridians = attrs.meridians || EasyTimepickerConfig.meridians;
-      scope.inputClass = attrs.inputClass || EasyTimepickerConfig.inputClass;
-      scope.inputContainerClass = attrs.inputContainerClass || EasyTimepickerConfig.inputContainerClass;
-      scope.clockIconClass = attrs.clockIconClass || EasyTimepickerConfig.clockIconClass;
-      scope.widgetColClass = attrs.widgetColClass || EasyTimepickerConfig.widgetColClass;
-      scope.incIconClass = attrs.incIconClass || EasyTimepickerConfig.incIconClass;
-      scope.decIconClass = attrs.decIconClass || EasyTimepickerConfig.decIconClass;
+      scope.minuteStep = parseInt(attrs.minuteStep, 10) || EzTimepickerConfig.minuteStep;
+      scope.showMeridian = scope.$eval(attrs.showMeridian) || EzTimepickerConfig.showMeridian;
+      scope.meridians = attrs.meridians || EzTimepickerConfig.meridians;
+      scope.inputClass = attrs.inputClass || EzTimepickerConfig.inputClass;
+      scope.inputContainerClass = attrs.inputContainerClass || EzTimepickerConfig.inputContainerClass;
+      scope.clockIconClass = attrs.clockIconClass || EzTimepickerConfig.clockIconClass;
+      scope.widgetColClass = attrs.widgetColClass || EzTimepickerConfig.widgetColClass;
+      scope.incIconClass = attrs.incIconClass || EzTimepickerConfig.incIconClass;
+      scope.decIconClass = attrs.decIconClass || EzTimepickerConfig.decIconClass;
       scope.widget = {};
 
       // fix automatic attribute mapping to root element
       //element.find('input.time-input').attr('id', attrs.id).attr('class', attrs.class);
-      //element.removeAttr('id').attr('class', 'dropdown easy-timepicker-container');
-
-      scope.updateFromInput = function() {
-        setTime(scope.time);
-      };
-
-      scope.preventDefault = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-      };
+      //element.removeAttr('id').attr('class', 'dropdown ez-timepicker-container');
 
       scope.incrementHours = function() {
         if (scope.showMeridian) {
@@ -144,7 +135,6 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
 
       var setTime = function(time) {
         var timeArray, dTime, hours, minutes;
-
         if (time) {
           if (time.match(new RegExp(scope.meridians[1].substring(0,1), 'i'))) {
             scope.widget.meridian = scope.meridians[1];
@@ -207,6 +197,12 @@ angular.module('easyTimepicker', ['ui.bootstrap'])
         scope.time = scope.widget.hours + ':' + scope.widget.minutes + ' ' + scope.widget.meridian;
       };
 
+      var input = element.find('input').first();
+      input.on('blur', function() {
+        scope.$apply(function() {
+          setTime(input.val());
+        });
+      });
       element.find('.hours-col').on('mousewheel wheel', scrollHours);
       element.find('.minutes-col').on('mousewheel wheel', scrollMinutes);
       element.find('.meridian-col').on('mousewheel wheel', scrollMeridian);

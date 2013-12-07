@@ -1,0 +1,47 @@
+.ez-timepicker-container .hours-col,
+.ez-timepicker-container .minutes-col,
+.ez-timepicker-container .meridian-col {
+  text-align: center;
+  padding: 0 !important;
+}
+.ez-timepicker-container .hours-col a,
+.ez-timepicker-container .minutes-col a,
+.ez-timepicker-container .meridian-col a {
+  color: #000;
+  font-size: 18px;
+  width: 100%;
+  display: block;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.ez-timepicker-container .hours-col a:hover,
+.ez-timepicker-container .minutes-col a:hover,
+.ez-timepicker-container .meridian-col a:hover {
+  border: solid 1px #ccc;
+  background-color: #eee;
+}
+.ez-timepicker-container .hours-col a i,
+.ez-timepicker-container .minutes-col a i,
+.ez-timepicker-container .meridian-col a i {
+  padding: 0;
+}
+.ez-timepicker-container .hours-col div:nth-child(2),
+.ez-timepicker-container .minutes-col div:nth-child(2),
+.ez-timepicker-container .meridian-col div:nth-child(2) {
+  margin: 2px 0;
+  font-size: 16px;
+}
+.ez-timepicker-container .dropdown-menu {
+  padding: 5px;
+}
+.ez-timepicker-container .dropdown-menu::after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  border-left: 6px solid transparent;
+  content: '';
+}

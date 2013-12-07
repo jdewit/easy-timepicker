@@ -12,8 +12,8 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
 
       // our app
-      'src/js/easy-timepicker.js',
-      'dist/easy-timepicker-tpls.js',
+      'src/js/ez-timepicker.js',
+      'dist/ez-timepicker-tpls.js',
 
       // tests
       'test/*Spec.js',

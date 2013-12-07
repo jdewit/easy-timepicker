@@ -1,5 +1,5 @@
 {
-  "name": "easy-timepicker",
+  "name": "ez-timepicker",
   "description": "Angular timepicker directive",
   "keywords": [],
   "version": "0.0.1",
@@ -29,6 +29,7 @@
     "karma-jasmine": "~0.1.3",
     "karma-requirejs": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
-    "karma": "~0.10.4"
+    "karma": "~0.10.4",
+    "grunt-angular-templates": "~0.5.0"
   }
 }

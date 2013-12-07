@@ -1,7 +1,8 @@
-angular.module('easyTimepicker').run(['$templateCache', function($templateCache) {
+angular.module('ez.timepicker').run(['$templateCache', function($templateCache) {
+  'use strict';
 
-  $templateCache.put('easy-timepicker.html',
-    "<div class=\"dropdown easy-timepicker-container\">\n" +
+  $templateCache.put('ez-timepicker.html',
+    "<div class=\"dropdown ez-timepicker-container\">\n" +
     "  <div class=\"dropdown-toggle\" ng-class=\"inputContainerClass\">\n" +
     "    <div class=\"time-input\" ng-transclude></div>\n" +
     "    <span class=\"input-group-btn\">\n" +

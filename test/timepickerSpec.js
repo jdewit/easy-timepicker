@@ -1,19 +1,23 @@
 describe('timepicker directive', function () {
-  var scope, el, ezScope, input;
+  var scope, el, ezScope, input, $httpBackend;
 
     var minuteStep = 15;
-  beforeEach(module('easyTimepicker'));
+  beforeEach(module('ez.timepicker'));
   beforeEach(module('ui.bootstrap'));
-  beforeEach(inject(function(_$compile_, _$rootScope_) {
+  beforeEach(inject(function(_$compile_, _$rootScope_, $templateCache) {
     $compile = _$compile_;
     scope = _$rootScope_;
+    scope.form = {time: null};
 
-    el = angular.element('<input ez-timepicker="time"/>');
+    el = angular.element('<div ez-timepicker="form.time"><input id="timeInput" name="test_time" ng-model="form.time"/></div>');
+
+		template = $templateCache.get('src/template/ez-timepicker.html');
+		$templateCache.put('ez-timepicker.html', template);
 
     $compile(el)(scope);
 
     scope.$digest();
-    input = el.find('input');
+    input = el.find('#timeInput');
   }));
 
   var timeToString = function(hours, minutes, meridian) {
@@ -95,46 +99,46 @@ describe('timepicker directive', function () {
       hours = 12;
     }
 
-    expect(scope.time).toEqual(timeToString(hours, minutes, meridian));
+    expect(scope.form.time).toEqual(timeToString(hours, minutes, meridian));
   });
 
   it('should handle stupid input from users', function() {
     setInput('10p');
-    expect(scope.time).toEqual('10:00 PM');
+    expect(scope.form.time).toEqual('10:00 PM');
 
     setInput('3a');
-    expect(scope.time).toEqual('3:00 AM');
+    expect(scope.form.time).toEqual('3:00 AM');
 
     setInput('1');
-    expect(scope.time).toEqual('1:00 AM');
+    expect(scope.form.time).toEqual('1:00 AM');
 
     setInput('13');
-    expect(scope.time).toEqual('1:00 PM');
+    expect(scope.form.time).toEqual('1:00 PM');
 
     setInput('10:20p');
-    expect(scope.time).toEqual('10:30 PM');
+    expect(scope.form.time).toEqual('10:30 PM');
 
     setInput('1020p');
-    expect(scope.time).toEqual('10:30 PM');
+    expect(scope.form.time).toEqual('10:30 PM');
 
     setInput('1020am');
-    expect(scope.time).toEqual('10:30 AM');
+    expect(scope.form.time).toEqual('10:30 AM');
 
     setInput('2320am');
-    expect(scope.time).toEqual('11:30 PM');
+    expect(scope.form.time).toEqual('11:30 PM');
 
     setInput('0');
-    expect(scope.time).toEqual('12:00 AM');
+    expect(scope.form.time).toEqual('12:00 AM');
   });
 
   it('should increment/decrement hours on click', function() {
     setInput('11:00 AM');
 
     el.find('.hours-col a')[0].click();
-    expect(scope.time).toEqual('12:00 PM');
+    expect(scope.form.time).toEqual('12:00 PM');
 
     el.find('.hours-col a')[1].click();
-    expect(scope.time).toEqual('11:00 AM');
+    expect(scope.form.time).toEqual('11:00 AM');
   });
 
   it('should increment/decrement hours on scroll', function() {
@@ -146,7 +150,7 @@ describe('timepicker directive', function () {
     expect(input.val()).toEqual('12:00 PM');
 
     mouseWheel(el.find('.hours-col'), -1);
-    expect(scope.time).toEqual('11:00 AM');
+    expect(scope.form.time).toEqual('11:00 AM');
   });
 
   it('should increment/decrement minutes on scroll', function() {
@@ -154,30 +158,30 @@ describe('timepicker directive', function () {
     el.find('.input-group-btn a').click();
 
     wheel(el.find('.minutes-col'), 1);
-    expect(scope.time).toEqual('12:00 PM');
+    expect(scope.form.time).toEqual('12:00 PM');
 
     mouseWheel(el.find('.minutes-col'), -1);
-    expect(scope.time).toEqual('11:45 AM');
+    expect(scope.form.time).toEqual('11:45 AM');
   });
 
   it('should increment/decrement minutes on click', function() {
     setInput('11:30 AM');
 
     el.find('.minutes-col a')[0].click();
-    expect(scope.time).toEqual('11:45 AM');
+    expect(scope.form.time).toEqual('11:45 AM');
 
     el.find('.minutes-col a')[1].click();
-    expect(scope.time).toEqual('11:30 AM');
+    expect(scope.form.time).toEqual('11:30 AM');
   });
 
   it('should toggle meridian minutes on click', function() {
     setInput('11:30 AM');
 
     el.find('.meridian-col a')[0].click();
-    expect(scope.time).toEqual('11:30 PM');
+    expect(scope.form.time).toEqual('11:30 PM');
 
     el.find('.meridian-col a')[1].click();
-    expect(scope.time).toEqual('11:30 AM');
+    expect(scope.form.time).toEqual('11:30 AM');
   });
 
   it('should show time in the widget & update on time change', function() {
@@ -193,5 +197,4 @@ describe('timepicker directive', function () {
     expect(el.find('.minutes-val').text()).toBe('30');
     expect(el.find('.meridian-val').text()).toBe('AM');
   });
-
 });
