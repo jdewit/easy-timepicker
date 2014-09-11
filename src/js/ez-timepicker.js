@@ -33,9 +33,14 @@ angular.module('ez.timepicker', ['ui.bootstrap'])
       scope.decIconClass = attrs.decIconClass || EzTimepickerConfig.decIconClass;
       scope.widget = {};
 
-      // fix automatic attribute mapping to root element
-      //element.find('input.time-input').attr('id', attrs.id).attr('class', attrs.class);
-      //element.removeAttr('id').attr('class', 'dropdown ez-timepicker-container');
+      scope.updateFromInput = function() {
+        setTime(scope.time);
+      };
+
+      scope.preventDefault = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      };
 
       scope.incrementHours = function() {
         if (scope.showMeridian) {
