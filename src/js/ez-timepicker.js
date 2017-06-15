@@ -215,6 +215,10 @@ angular.module('ez.timepicker', ['ui.bootstrap'])
       scope.$watch('widget', function(val) {
         updateModel();
       }, true);
+      
+      scope.$watch('time', function(val) {
+        setTime(val);;
+      });
     }
   };
 }]);
